@@ -34,17 +34,6 @@ A full-stack blog application built using the **MERN Stack** (MongoDB, Express, 
 
 ---
 
-## Getting Started
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/KrishKorat/BleuBlanc.git
-cd BlueBlanc
-```
-
----
-
 ## Backend Setup
 
 ### Navigate to Backend Folder

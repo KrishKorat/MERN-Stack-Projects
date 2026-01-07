@@ -34,17 +34,6 @@ A full-stack notes-taking application built using the **MERN Stack** (MongoDB, E
 
 ---
 
-## Getting Started
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/KrishKorat/ThinkBoard.git
-cd ThinkBoard
-```
-
----
-
 ## Backend Setup
 
 ### Navigate to Backend Folder

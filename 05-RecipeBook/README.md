@@ -35,17 +35,6 @@ A full-stack recipe application built using the **MERN Stack** (MongoDB, Express
 
 ---
 
-## Getting Started
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/KrishKorat/RecipeBook.git
-cd RecipeBook
-```
-
----
-
 ## Backend Setup
 
 ### Navigate to Backend Folder
