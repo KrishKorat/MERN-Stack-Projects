@@ -25,6 +25,7 @@ export default function Register() {
         }
         catch(err) {
             setError(err.response?.data?.message || "Registration Failed");
+            console.log(err.message);
         }
     };
 

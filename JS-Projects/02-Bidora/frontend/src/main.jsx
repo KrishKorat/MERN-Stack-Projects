@@ -7,10 +7,10 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 
-window.addEventListener("submit", (e) => {
-  console.error("🚨 FORM SUBMIT BLOCKED", e.target);
-  e.preventDefault();
-});
+// window.addEventListener("submit", (e) => {
+//   console.error("🚨 FORM SUBMIT BLOCKED", e.target);
+//   e.preventDefault();
+// });
 
 
 createRoot(document.getElementById('root')).render(
