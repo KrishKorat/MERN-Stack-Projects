@@ -20,7 +20,7 @@ export const createNote = async (req: Request, res: Response) => {
 // GET all notes
 export const getAllNotes = async (req: Request, res: Response) => {
     try {
-        const notes = await Note.find().sort({ createdAt: -1 });
+        const notes = await Note.find();
         res.json(notes);
     }
     catch(err) {
