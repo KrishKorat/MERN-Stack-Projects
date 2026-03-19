@@ -2,8 +2,12 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        heading: ['"Playfair Display"', "serif"],
+        body: ["Poppins", "sans-serif"],
+      },
+    },
   },
-  plugins: [require('@tailwindcss/line-clamp')],
-}
-
+  plugins: [],
+};

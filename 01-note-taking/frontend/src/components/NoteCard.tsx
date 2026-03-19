@@ -2,18 +2,23 @@ import type { Note } from "../types/note";
 
 interface Props {
     note: Note;
+    onEdit: (note: Note) => void;
+    onDelete: (id: string) => void;
 }
 
 
-const NoteCard = ({ note }: Props) => {
+const NoteCard = ({ note, onEdit, onDelete }: Props) => {
     return(
-        <div className="backdrop-blur-lg bg-white/70 border border-white/40 rounded-2xl p-5 shadow-md hover:shadow-xl transition duration-300 hover:-translate-y-1">
+        <div 
+            onClick={() => onEdit(note)}
+            className="backdrop-blur-lg bg-white/70 border border-white/40 rounded-2xl p-5 shadow-md hover:shadow-xl transition duration-300 hover:-translate-y-1 bg-gradient-to-br from-pink-50 via-white to-purple-50"
+            >
 
-            <h2 className="text-xl font-semibold text-gray-800">
+            <h2 className="text-xl font-heading text-gray-800">
                 {note.title}
             </h2>
 
-            <p className="text-gray-600 mt-3 line-clamp-4">
+            <p className="text-gray-600 mt-3 font-body line-clamp-4">
                 {note.content}
             </p>
 
@@ -26,6 +31,16 @@ const NoteCard = ({ note }: Props) => {
                 Note
                 </span>
             </div>
+
+            <button
+                onClick={(e) => {
+                e.stopPropagation();
+                onDelete(note._id);
+                }}
+                className="absolute top-3 right-3 text-red-500 hover:text-red-700 text-sm"
+            >
+                🗑️
+            </button>
         </div>
     );
 };

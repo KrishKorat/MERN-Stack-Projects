@@ -8,7 +8,7 @@ export const createNote = async (req: Request, res: Response) => {
     try {
         const { title, content } = req.body;
         const note = await Note.create({ title, content });
-        res.status(201).json({ message: "A note has been created" });
+        res.status(201).json(note);
     }
     catch(err) {
         res.status(500).json({ message: "An error occured while creating note" });
@@ -57,7 +57,7 @@ export const updateNote = async (req: Request, res: Response) => {
         )
 
         if (!note) return res.status(404).json({ message: "Note does not exist" });
-        res.json({ message: "Note has been updated" });
+        res.json(note);
     }
     catch(err) {
         res.status(500).json({ message: "An error occured while updating note" });
