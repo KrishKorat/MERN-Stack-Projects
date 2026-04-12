@@ -4,8 +4,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 
-const generateToken = (id: string) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET as string, {
+const generateToken = (id: string, name: string) => {
+    return jwt.sign({ id, name }, process.env.JWT_SECRET as string, {
         expiresIn: "7d"
     });
 };
@@ -39,7 +39,7 @@ export const registerUser = async (req: Request, res: Response) => {
             _id: user.id,
             name: user.name,
             email: user.email,
-            token: generateToken(user._id.toString())
+            token: generateToken(user._id.toString(), user.name.toString())
         });
     }
     catch(err) {
@@ -73,7 +73,7 @@ export const loginUser = async (req: Request, res: Response) => {
             _id: user._id,
             name: user.name,
             email: user.email,
-            token: generateToken(user._id.toString())
+            token: generateToken(user._id.toString(), user.name.toString())
         });
     }
     catch(err) {
