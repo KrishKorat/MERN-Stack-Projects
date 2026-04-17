@@ -27,7 +27,7 @@ const noteSchema = new mongoose.Schema<INote>({
     title: { type: String, required: true },
     content: { type: String },
 
-    checklist: { checklistSchema },
+    checklist: [checklistSchema],
 
     type: {
         type: String,

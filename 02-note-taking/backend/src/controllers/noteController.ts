@@ -14,11 +14,12 @@ interface AuthRequest extends Request {
 // CREATE NOTE
 export const createNote = async (req: AuthRequest, res: Response) => {
     try {
-        const error = validateNote(req.body);
+        const error = await validateNote(req.body);
         if (error) {
             return res.status(400).json({ message: error });
         }
 
+        
         const note = await Note.create({
             ...req.body,
             userId: req.user._id
@@ -115,7 +116,7 @@ export const updateNote = async (req: AuthRequest, res: Response) => {
             return res.status(400).json({ message: "Invalid note ID" });
         }
 
-        const error = validateNote(req.body);
+        const error = await validateNote(req.body);
         if (error) {
             return res.status(400).json({ message: error });
         }
