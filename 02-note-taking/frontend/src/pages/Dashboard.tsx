@@ -11,12 +11,27 @@ function Dashboard() {
     const [notes, setNotes] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
+
+    const [search, setSearch] = useState("");
+    const [category, setCategory] = useState("");
+    const [categories, setCategories] = useState<string[]>([]);
+    const [sort, setSort] = useState("newest");
+
+    const [debouncedSearch, setDebouncedSearch] = useState(search);
+
+
     const fetchNotes = async() => {
         try {
-            const res = await API.get("/notes");
+            const res = await API.get("/notes", {
+                params: {
+                    search: debouncedSearch || undefined,
+                    category: category || undefined,
+                    sort
+                }
+            });
             setNotes(res.data);
         }
-        catch (err) {
+        catch {
             console.error("Failed to fetch notes");
         } finally {
             setLoading(false);
@@ -24,6 +39,19 @@ function Dashboard() {
     }
     useEffect(() => {
         fetchNotes();
+    }, [debouncedSearch, category, sort]);
+
+    const fetchCategories = async() => {
+        try {
+            const res = await API.get<string[]>("/notes/categories");
+            setCategories(res.data);
+        }
+        catch {
+            console.error("Failed to fetch categories");
+        }
+    }
+    useEffect(() => {
+        fetchCategories();
     }, []);
 
 
@@ -55,9 +83,60 @@ function Dashboard() {
             alert("Failed to delete note");
         }
     }
+
+
+
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedSearch(search);
+        }, 400);
+
+        return () => clearTimeout(timer);
+    }, [search]);
+
+
+
     return(
         <>
             <Navbar />
+
+            <div className="flex flex-col md:flex-row justify-center gap-3 mb-4 p-4">
+                {/* Search */}
+                <input
+                    placeholder="Search notes..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="p-2 border rounded w-full md:w-1/3"
+                />
+
+                {/* Category */}
+                <select
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                    className="p-2 border rounded"
+                >
+                    <option value="">All Categories</option>
+                    {categories.map((cat) => (
+                        <option key={cat} value={cat}>
+                            {cat}
+                        </option>
+                    ))}
+                </select>
+
+                {/* Sort */}
+                <select
+                    value={sort}
+                    onChange={(e) => setSort(e.target.value)}
+                    className="p-2 border rounded"
+                >
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                    <option value="importance">Importance</option>
+                </select>
+            </div>
+
+
 
             <div className="p-6">
                 {loading ? (

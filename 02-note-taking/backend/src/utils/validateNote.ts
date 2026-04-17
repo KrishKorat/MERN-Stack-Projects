@@ -1,6 +1,5 @@
 export const validateNote = async (data: any) => {
     const { type, content, checklist } = data;
-    console.log("CONTENT 👉", JSON.stringify(content));
 
     if (!type) {
         return "Type is required";

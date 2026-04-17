@@ -18,7 +18,6 @@ export const createNote = async (req: AuthRequest, res: Response) => {
         if (error) {
             return res.status(400).json({ message: error });
         }
-
         
         const note = await Note.create({
             ...req.body,
@@ -158,5 +157,19 @@ export const deleteNote = async (req: AuthRequest, res: Response) => {
     }
     catch(err) {
         res.status(500).json({ message: "Error deleting note" });
+    }
+}
+
+
+
+export const getCategories = async (req: AuthRequest, res:Response) => {
+    try {
+        const categories = await Note.distinct("category", {
+            userId: req.user._id
+        });
+        res.json(categories);
+    }
+    catch (err) {
+        res.status(500).json({ message: "Failed to fetch categories" });
     }
 }
